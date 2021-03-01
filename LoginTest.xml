@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+<listeners>
+		<listener class-name="io.nirmata.listeners.ListenersClass"></listener>
+	</listeners>
+	<test thread-count="5" name="Test">
+		<parameter name="email" value="alexandru@nirmata.com"></parameter>
+		<parameter name="password" value="nirmata01"></parameter>
+		<parameter name="expectedAccountName"
+			value="alexandru@nirmata.com"></parameter>
+		<parameter name="expectedHomePageTitle"
+			value="Nirmata | K8s Operations and Management"></parameter>
+		<classes>
+			<class name="io.nirmata.tests.LoginTest" />
+		</classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

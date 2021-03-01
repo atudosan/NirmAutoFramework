@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-03-01T15:18:17 PST" name="Suite" finished-at="2021-03-01T15:18:47 PST" duration-ms="30874">
+    <groups>
+    </groups>
+    <test started-at="2021-03-01T15:18:17 PST" name="Test" finished-at="2021-03-01T15:18:47 PST" duration-ms="30874">
+      <class name="io.nirmata.tests.CreateCatalog">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:io.nirmata.tests.CreateCatalog@776b83cc]" started-at="2021-03-01T15:18:17 PST" name="setUp" finished-at="2021-03-01T15:18:25 PST" duration-ms="7849" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="createCatalog(java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:io.nirmata.tests.CreateCatalog@776b83cc]" started-at="2021-03-01T15:18:25 PST" name="createCatalog" finished-at="2021-03-01T15:18:46 PST" duration-ms="21814" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[alexandru@nirmata.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[nirmata01]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[123ABC321]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createCatalog -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:io.nirmata.tests.CreateCatalog@776b83cc]" started-at="2021-03-01T15:18:46 PST" name="tearDown" finished-at="2021-03-01T15:18:47 PST" duration-ms="1104" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- io.nirmata.tests.CreateCatalog -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
