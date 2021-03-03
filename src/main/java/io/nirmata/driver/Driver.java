@@ -36,9 +36,6 @@ public final class Driver {
 	}
 
 
-	public static void sleep(int sec) {
-		Uninterruptibles.sleepUninterruptibly(sec, TimeUnit.SECONDS);
-	}
 
 }
 

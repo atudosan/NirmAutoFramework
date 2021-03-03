@@ -17,25 +17,26 @@ public class CatalogDescriptionPage extends MainNavigationBar {
 	private final By deleteCatalogBtn = By.xpath("//button[contains(@class, 'danger')]");
 			
 	
-	public String getActualCatalogName() {
-		return getText(catalogNameInfo, WaitStrategy.VISIBLE, "Catalog Name");
-	}
-	
 	public CatalogsPage returnToCatalogListPage() {
 		clickOn(returnCatalogListLink, WaitStrategy.NONE, "return to Catalog List page link");
 		return new CatalogsPage();
 	}
 	
-	public void deleteCatalog() {
+	public CatalogsPage deleteCatalog() {
 		clickOn(threeDotsMenu, WaitStrategy.VISIBLE, "Three dots menu");
 		Uninterruptibles.sleepUninterruptibly(2, TimeUnit.SECONDS);
 		clickOn(deleteCatalogMenu, WaitStrategy.PRESENCE, "Delete catalog menu button");
 		Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
 		clickOn(deleteCatalogBtn, WaitStrategy.CLICKABLE, "Delete Alert Button");
+		return new CatalogsPage();
 	}
 	
-	
-	
+	public boolean validateNewlyCreatedCatalogName(String catalogName) {
+		String actualErrorMsg = getText(catalogNameInfo, WaitStrategy.VISIBLE, "Catalog Name");
+		String expectedErrorMsg = catalogName;
+		boolean result = validateString(expectedErrorMsg, actualErrorMsg, "Catalog Name");
+		return result;
+	}
 	
 
 }

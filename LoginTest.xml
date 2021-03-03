@@ -5,7 +5,7 @@
 		<listener class-name="io.nirmata.listeners.ListenersClass"></listener>
 	</listeners>
 	<test name="Test">
-		<parameter name="email" value="1alexandru@nirmata.com"></parameter>
+		<parameter name="email" value="alexandru@nirmata.com"></parameter>
 		<parameter name="password" value="nirmata01"></parameter>
 		<parameter name="expectedAccountName"
 			value="alexandru@nirmata.com"></parameter>

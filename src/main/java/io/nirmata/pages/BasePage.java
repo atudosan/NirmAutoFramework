@@ -2,14 +2,10 @@ package io.nirmata.pages;
 
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
-import com.google.common.util.concurrent.Uninterruptibles;
 
 import io.nirmata.driver.DriverManager;
 import io.nirmata.enums.WaitStrategy;
@@ -17,15 +13,29 @@ import io.nirmata.factories.ExplicitWaitFactory;
 import io.nirmata.reports.ExtentLogger;
 
 public class BasePage {
+	
+	protected void clickOn(By by, WaitStrategy waitStrategy, String elementName) {
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		try {
+			element.click();
+			ExtentLogger.info(elementName+ " was clicked", true);
+		} catch (Exception e) {
+			ExtentLogger.fail(elementName+ " was not clicked, due to "+e, true);
+		}
+	}
+	
+	protected void sendText(By by, String text, WaitStrategy waitStrategy, String elementName){
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		try {
+			element.sendKeys(text);
+			ExtentLogger.info( "Text ["+text+"] was sent to ["+elementName+"] textfield", true);
+		} catch (Exception e) {
+			ExtentLogger.fail( "Text ["+text+"] was not sent to ["+elementName+"] textfield, due to "+e, true);
+		} 
+	}
 
-	/*
-	 * private WebElement find(By by, WaitStrategy waitStrategy) { return
-	 * ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
-	 * 
-	 * }
-	 */
 
-	protected boolean checkPresenceOfWebElementFromList(By by, WaitStrategy waitStrategy, 
+	protected boolean validatePresenceOfWebElementFromList(By by, WaitStrategy waitStrategy, 
 			String desiredElementName) {
 		boolean presenseOfElement = false;
 		try {
@@ -70,26 +80,6 @@ public class BasePage {
 		return pageTitle;
 	}
 
-	protected void clickOn(By by, WaitStrategy waitStrategy, String elementName) {
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
-		try {
-			element.click();
-			ExtentLogger.info(elementName+ " was clicked", true);
-		} catch (Exception e) {
-			ExtentLogger.fail(elementName+ " was not clicked, due to "+e, true);
-		}
-	}
-
-	protected void sendText(By by, String text, WaitStrategy waitStrategy, String elementName){
-		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
-		try {
-			element.sendKeys(text);
-			ExtentLogger.info( "Text ["+text+"] was sent to ["+elementName+"] textfield", true);
-		} catch (Exception e) {
-			ExtentLogger.fail( "Text ["+text+"] was not sent to ["+elementName+"] textfield, due to "+e, true);
-		} 
-	}
-
 	protected void hoverOver(By by, WaitStrategy waitStrategy, String elementName) {
 		Actions action = new Actions(DriverManager.getDriver());
 		try {
@@ -101,11 +91,21 @@ public class BasePage {
 
 	}
 	
-	protected void alertHandling(String elementName) {
-		Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
-		Alert alert = DriverManager.getDriver().switchTo().alert();
-		alert.accept();
+	protected boolean validateString(String expectedString, String actualString, String elementName) {
+		boolean result = false;
+		if (actualString.equalsIgnoreCase(expectedString)) {
+			result = true;
+			ExtentLogger.info(elementName+" Validation Passed! Actual String ["+actualString+"] is the same as Expected String ["
+					+expectedString+"]", true);
+		} else {
+			ExtentLogger.fail(elementName+" Validation Failed! Actual expected string is ["+actualString+"]"
+					+ " but expected was["+expectedString+"]", true);
+			result = false;
+		}
+		return result;
 	}
+	
+
 
 
 

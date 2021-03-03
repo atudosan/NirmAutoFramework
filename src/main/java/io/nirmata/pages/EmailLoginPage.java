@@ -8,7 +8,7 @@ public class EmailLoginPage extends BasePage {
 	
 	private final By txtEmail = By.name("email");
 	private final By btnSignIn = By.id("btnLogin");
-	private final By infoAccountName = By.xpath("//div[@class='login-title']");
+	
 	
 	
 	public EmailLoginPage provideEmail(String email) {
