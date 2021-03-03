@@ -1,7 +1,5 @@
 package io.nirmata.listeners;
 
-import java.util.Arrays;
-
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestContext;
@@ -38,7 +36,7 @@ public class ListenersClass implements ITestListener, ISuiteListener{
 	@Override
 	public void onTestFailure(ITestResult result) {
 			ExtentLogger.fail(result.getMethod().getMethodName()+" is failed", true);
-			ExtentLogger.fail(Arrays.toString(result.getThrowable().getStackTrace()));
+			ExtentLogger.fail(result.getThrowable().toString());
 	}
 	
 	@Override

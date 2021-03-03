@@ -27,7 +27,6 @@ public class LoginTest extends BaseTest{
 		softAssert.assertEquals(plp.getActualAccountName(), expectedAccountName, "Account Name mismatch");
 		plp.clickOnSighInBtn();
 		softAssert.assertEquals(plp.getActualAccountName(), expectedAccountName, "Account Name mismatch");
-		hp.logOut();
 		
 		softAssert.assertAll();
 

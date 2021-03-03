@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="io.nirmata.tests.LoginTest">
+      <class name="io.nirmata.tests.CreateCatalog">
         <methods>
-          <include name="test1"/>
+          <include name="createCatalog"/>
           <include name="setUp"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- io.nirmata.tests.LoginTest -->
+      </class> <!-- io.nirmata.tests.CreateCatalog -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

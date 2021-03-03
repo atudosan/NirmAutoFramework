@@ -2,10 +2,14 @@ package io.nirmata.pages;
 
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+
+import com.google.common.util.concurrent.Uninterruptibles;
 
 import io.nirmata.driver.DriverManager;
 import io.nirmata.enums.WaitStrategy;
@@ -37,9 +41,9 @@ public class BasePage {
 			ExtentLogger.fail("Element "+desiredElementName+" was not present in List, due to "+e, true);
 		}
 		return presenseOfElement;
-
-
 	}
+	
+	
 
 	protected String getText(By by, WaitStrategy waitStrategy, String elementName) {
 		String text = null;
@@ -95,6 +99,12 @@ public class BasePage {
 			ExtentLogger.fail(elementName+ " was not found, due to "+e, true);
 		}
 
+	}
+	
+	protected void alertHandling(String elementName) {
+		Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+		Alert alert = DriverManager.getDriver().switchTo().alert();
+		alert.accept();
 	}
 
 

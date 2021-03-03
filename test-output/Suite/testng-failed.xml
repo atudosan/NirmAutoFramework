@@ -4,18 +4,19 @@
   <listeners>
     <listener class-name="io.nirmata.listeners.ListenersClass"/>
   </listeners>
-  <test thread-count="5" name="Test(failed)">
-    <parameter name="catalogName" value="123A321"/>
+  <test thread-count="5" parallel="methods" name="Test(failed)">
     <parameter name="password" value="nirmata01"/>
-    <parameter name="email" value="alexandru@nirmata.com"/>
+    <parameter name="expectedHomePageTitle" value="Nirmata | K8s Operations and Management"/>
+    <parameter name="email" value="1alexandru@nirmata.com"/>
+    <parameter name="expectedAccountName" value="alexandru@nirmata.com"/>
     <classes>
-      <class name="io.nirmata.tests.CreateCatalog">
+      <class name="io.nirmata.tests.LoginTest">
         <methods>
-          <include name="createCatalog"/>
+          <include name="logInTest"/>
           <include name="setUp"/>
           <include name="tearDown"/>
         </methods>
-      </class> <!-- io.nirmata.tests.CreateCatalog -->
+      </class> <!-- io.nirmata.tests.LoginTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

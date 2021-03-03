@@ -27,5 +27,12 @@ public class CatalogsPage extends MainNavigationBar{
 		
 	}
 	
+	public CatalogDescriptionPage navigateToCatalog(String catalogName) {
+		String xpathString = "//span[text()='"+catalogName+"']/ancestor::div[contains(@class, 'select')]";
+		By catalogXpath = By.xpath(xpathString);
+		clickOn(catalogXpath, WaitStrategy.VISIBLE, "Catalog Conatiner");
+		return new CatalogDescriptionPage();
+	}
+	
 
 }

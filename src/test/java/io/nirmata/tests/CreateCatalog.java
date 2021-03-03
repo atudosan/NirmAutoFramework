@@ -41,7 +41,7 @@ public class CreateCatalog extends BaseTest {
 		assertTrue(catalogsPage.checkIfCreatedCatalogIsPresentInList(catalogName));
 		assertEquals(catalogsPage.getActualOwnerOfCreatedCatalog(catalogName), email);
 		
-		catalogsPage.logOut();
+		catalogsPage.navigateToCatalog(catalogName).deleteCatalog();
 		
 
 		}
