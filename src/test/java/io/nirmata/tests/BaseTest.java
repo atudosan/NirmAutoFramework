@@ -21,7 +21,7 @@ public class BaseTest {
 	protected void setUp() {
 		Driver.initDriver(PropertyUtils.getValue(ConfigProperties.BROWSER));
 		DriverManager.getDriver().manage().window().maximize();
-		Uninterruptibles.sleepUninterruptibly(7, TimeUnit.SECONDS);
+		Uninterruptibles.sleepUninterruptibly(9, TimeUnit.SECONDS);
 		DriverManager.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 

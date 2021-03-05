@@ -12,6 +12,7 @@ import io.nirmata.pages.CatalogDescriptionPage;
 import io.nirmata.pages.CatalogsPage;
 import io.nirmata.pages.CreateCatalogPage;
 import io.nirmata.pages.EmailLoginPage;
+import io.nirmata.pages.HomePage;
 import io.nirmata.pages.PasswordLoginPage;
 
 public class CreateCatalog extends BaseTest {
@@ -21,23 +22,24 @@ public class CreateCatalog extends BaseTest {
 	CatalogsPage catalogsPage = new CatalogsPage();
 	CreateCatalogPage createCatalogPage = new CreateCatalogPage();
 	CatalogDescriptionPage catalogDescriptionPage = new CatalogDescriptionPage();
+	HomePage homePage = new HomePage();
 	SoftAssert softAssert = new SoftAssert();
 	
 	@Parameters({ "email", "password", "catalogName"})
 	@Test(priority=1)	
 	public void createCatalog(String email, String password, String catalogName) {
-		emailLoginPage.provideEmail(email).
-		clickOnSighInBtn().
-		providePassword(password).
-		clickOnSighInBtn().
-		selectMenu("Workloads", "Catalogs");
-		catalogsPage.addNewCatalog().
-		provideCatalogName(catalogName).
-		clickOnAddCatalogBtn();
+		emailLoginPage.provideEmail(email);
+		emailLoginPage.clickOnSighInBtn();
+		passwordLoginPage.providePassword(password);
+		passwordLoginPage.clickOnSighInBtn();
+		homePage.selectMenu("Workloads", "Catalogs");
+		catalogsPage.addNewCatalog();
+		createCatalogPage.provideCatalogName(catalogName);
+		createCatalogPage.clickOnAddCatalogBtn();
 		
 		softAssert.assertTrue(catalogDescriptionPage.validateNewlyCreatedCatalogName(catalogName));
 		catalogDescriptionPage.returnToCatalogListPage();
-		softAssert.assertTrue(catalogsPage.validateIfCreatedCatalogIsPresentInList(catalogName));
+		softAssert.assertTrue(catalogsPage.validateIfCatalogIsPresentInList(catalogName));
 		softAssert.assertTrue(catalogsPage.validateActualCatalogOwner(catalogName, email));
 		softAssert.assertAll();
 	}
@@ -68,13 +70,8 @@ public class CreateCatalog extends BaseTest {
 			selectMenu("Workloads", "Catalogs");
 			catalogsPage.navigateToCatalog(catalogName).
 			deleteCatalog();
-			Assert.assertFalse(catalogsPage.validateIfDeletedCatalogIsNotPresentInList(catalogName));
-			
-			
+			Assert.assertFalse(catalogsPage.validateIfCatalogIsPresentInList(catalogName));
 		}
-		
-		
-
 		
 
 }

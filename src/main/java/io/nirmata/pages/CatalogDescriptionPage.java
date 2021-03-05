@@ -15,6 +15,7 @@ public class CatalogDescriptionPage extends MainNavigationBar {
 	private final By threeDotsMenu = By.xpath("//a[contains(@class,'btn')]");
 	private final By deleteCatalogMenu = By.xpath("//a[@id='deleteCatalog']");
 	private final By deleteCatalogBtn = By.xpath("//button[contains(@class, 'danger')]");
+	private final By addApplicationBtn = By.xpath("//button[@type='Add Application']");
 			
 	
 	public CatalogsPage returnToCatalogListPage() {
@@ -36,6 +37,11 @@ public class CatalogDescriptionPage extends MainNavigationBar {
 		String expectedErrorMsg = catalogName;
 		boolean result = validateString(expectedErrorMsg, actualErrorMsg, "Catalog Name");
 		return result;
+	}
+	
+	public CreateApplicationPage clickAddApplication() {
+		clickOn(addApplicationBtn, WaitStrategy.CLICKABLE, "Add Application Button");
+		return new CreateApplicationPage();
 	}
 	
 

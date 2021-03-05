@@ -4,8 +4,10 @@ package io.nirmata.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import io.nirmata.driver.DriverManager;
 import io.nirmata.enums.WaitStrategy;
@@ -27,15 +29,47 @@ public class BasePage {
 	protected void sendText(By by, String text, WaitStrategy waitStrategy, String elementName){
 		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
 		try {
+			element.clear();
 			element.sendKeys(text);
 			ExtentLogger.info( "Text ["+text+"] was sent to ["+elementName+"] textfield", true);
 		} catch (Exception e) {
 			ExtentLogger.fail( "Text ["+text+"] was not sent to ["+elementName+"] textfield, due to "+e, true);
 		} 
 	}
+	
+	protected void pressEnter(By by, WaitStrategy waitStrategy, String elementName){
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		try {
+			element.sendKeys(Keys.ENTER);
+			ExtentLogger.info( "Enter key was pressed on ["+elementName+"]", true);
+		} catch (Exception e) {
+			ExtentLogger.fail( "Enter key was not pressed on ["+elementName+"], due to "+e, true);
+		} 
+	}
+	
+	protected void pressArrowDownKey(int iterations, By by, WaitStrategy waitStrategy) {
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		for(int i = 0; i <= iterations; i++) {
+			element.sendKeys(Keys.ARROW_DOWN);
+		}
+	}
+	
+	
+	
+	protected void sendDigit(By by, int i, WaitStrategy waitStrategy, String elementName){
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		String digit = i+"";
+		try {
+			element.clear();
+			element.sendKeys(digit);
+			ExtentLogger.info( "Text ["+digit+"] was sent to ["+elementName+"] textfield", true);
+		} catch (Exception e) {
+			ExtentLogger.fail( "Text ["+digit+"] was not sent to ["+elementName+"] textfield, due to "+e, true);
+		} 
+	}
 
 
-	protected boolean validatePresenceOfWebElementFromList(By by, WaitStrategy waitStrategy, 
+	protected boolean validatePresenceOfWebElementFromListByItsText(By by, WaitStrategy waitStrategy, 
 			String desiredElementName) {
 		boolean presenseOfElement = false;
 		try {
@@ -65,6 +99,18 @@ public class BasePage {
 			ExtentLogger.fail("Text from "+elementName+" was not captured, due to "+e, true);
 		}
 		return text;
+	}
+	
+	protected void selectOptionFromDropdown(By by, String value, WaitStrategy waitStrategy,
+			String elementName) {
+		try {
+		WebElement element = ExplicitWaitFactory.performExplicitWait(waitStrategy, by);
+		Select select = new Select(element);
+		select.selectByValue(value);
+		ExtentLogger.info("["+value+"] was selected from ["+elementName+"] dropdown list", true);
+		} catch (Exception e) {
+			ExtentLogger.fail("["+value+"] was not selected from ["+elementName+"] dropdown list, due to"+e, true);
+		}
 	}
 
 

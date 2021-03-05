@@ -19,14 +19,9 @@ public class CatalogsPage extends MainNavigationBar{
 		return new CreateCatalogPage();
 	}
 
-	public boolean validateIfCreatedCatalogIsPresentInList(String catalogName) {
+	public boolean validateIfCatalogIsPresentInList(String catalogName) {
 		Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
-		return validatePresenceOfWebElementFromList(catalogNameInfo, WaitStrategy.CLICKABLE, catalogName);
-	}
-
-	public boolean validateIfDeletedCatalogIsNotPresentInList(String catalogName) {
-		Uninterruptibles.sleepUninterruptibly(5, TimeUnit.SECONDS);
-		return validatePresenceOfWebElementFromList(catalogNameInfo, WaitStrategy.CLICKABLE, catalogName);
+		return validatePresenceOfWebElementFromListByItsText(catalogNameInfo, WaitStrategy.CLICKABLE, catalogName);
 	}
 
 	public boolean validateActualCatalogOwner(String catalogName, String email) {
@@ -36,13 +31,12 @@ public class CatalogsPage extends MainNavigationBar{
 		String actualOwner = getText(ownerXpath, WaitStrategy.NONE, "Owner of Catalog");
 		String expectedOwner = email;
 		return validateString(expectedOwner, actualOwner, "Owner of catalog");
-
 	}
 
 	public CatalogDescriptionPage navigateToCatalog(String catalogName) {
 		String xpathString = "//span[text()='"+catalogName+"']/ancestor::div[contains(@class, 'select')]";
 		By catalogXpath = By.xpath(xpathString);
-		clickOn(catalogXpath, WaitStrategy.VISIBLE, "Catalog Conatiner");
+		clickOn(catalogXpath, WaitStrategy.VISIBLE, "Catalog Box");
 		return new CatalogDescriptionPage();
 	}
 
